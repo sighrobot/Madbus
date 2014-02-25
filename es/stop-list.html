@@ -1,0 +1,45 @@
+<div class="keep-margin-mobile">
+<div class="container-fluid">
+  <div class="row-fluid" >
+
+    <div class="span6 offset3">
+      <!--<small class="muted"><a href="#/route/list">All routes</a> &rarr; Route {{routeID.dezero()}}</small>-->
+      <h3 style="font-weight:normal;"class="muted">Paradas en <strong>Ruta {{routeID.dezero()}}</strong></h3>
+      
+      
+        <input class="input span12" type="text" placeholder="Busca paradas" ng-model="query1" />
+   <br><br>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span6 offset3">
+    
+      <table class="table table-striped table-hover" style="border:1px solid #ddd;">
+        <tr>
+          <th class="muted" style="vertical-align:middle;background:#f5f5f5;"><small ng-click="sortBy('intersection')">Intersecci&oacute;n o ubicaci&oacute;n</small></th>
+          
+<th class="muted" style="text-align:center;background:#f5f5f5;"><small ng-click="sortBy('destination')">Direcci&oacute;n</small></th>
+          <th class="muted" style="text-align:center;vertical-align:middle;background:#f5f5f5;"><small ng-click="sortBy('stopID')">&#8470;&nbsp;de&nbsp;parada</small></th>
+          
+          
+        </tr>
+        <tr ng-repeat="stop in stops | orderBy:sort | filter:query1">
+          <td style="font-size:16px;"><a href="#/stop/{{stop.stopID}}">{{stop.intersection}}</a></td>
+          
+<td style="text-align:center;"><small>{{stop.destination | directionES}}</small></td>
+<td class="muted" style="text-align:center;"><small>{{stop.stopID}}</small></td>
+          
+          
+          
+        </tr>
+        <tr><td colspan="3" style="text-align:center;" ng-hide="stops.length" ><br><img src="img/ajax-loader-big.gif"/><br>&nbsp;</td></tr>
+      </table>
+    </div>
+    
+  </div>
+</div>

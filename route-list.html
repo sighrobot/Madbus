@@ -1,0 +1,93 @@
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+
+      <h4 style="font-weight:normal;">Find bus stops <strong>by route</strong></h4><br>
+
+     
+        <table class="table table-condensed route-pad visible-xs">
+        <tr>
+        <td><a type="button" ng-click="setRange(0,100)" class="btn btn-default"><strong>All</strong></a></td>
+        <td><a type="button" ng-click="setRange(1,9)" class="btn btn-default ">&nbsp;1s</a></td>
+        <td><a type="button" ng-click="setRange(10,19)" class="btn btn-default">10s</a></td>
+        <td><a type="button" ng-click="setRange(20,29)" class="btn btn-default ">20s</a></td>
+        <td><a type="button" ng-click="setRange(30,39)" class="btn btn-default">30s</a></td>
+      </tr>
+      <tr>
+        <td><a type="button" ng-click="setRange(40,49)" class="btn btn-default">40s</a></td>
+        <td><a type="button" ng-click="setRange(50,59)" class="btn btn-default">50s</a></td>
+        <td><a type="button" ng-click="setRange(60,69)" class="btn btn-default">60s</a></td>
+        <td><a type="button" ng-click="setRange(70,79)" class="btn btn-default">70s</a></td>
+        <td><a type="button" ng-click="setRange(80,89)" class="btn btn-default">80s</a></td>
+      </tr>
+      </table>
+      <table class="table table-condensed route-pad hidden-xs">
+        <tr>
+        <td><a type="button" ng-click="setRange(0,100)" class="btn btn-default"><strong>All</strong></a></td>
+        <td><a type="button" ng-click="setRange(1,9)" class="btn btn-default ">&nbsp;1s</a></td>
+        <td><a type="button" ng-click="setRange(10,19)" class="btn btn-default">10s</a></td>
+        <td><a type="button" ng-click="setRange(20,29)" class="btn btn-default ">20s</a></td>
+        <td><a type="button" ng-click="setRange(30,39)" class="btn btn-default">30s</a></td>
+      
+        <td><a type="button" ng-click="setRange(40,49)" class="btn btn-default">40s</a></td>
+        <td><a type="button" ng-click="setRange(50,59)" class="btn btn-default">50s</a></td>
+        <td><a type="button" ng-click="setRange(60,69)" class="btn btn-default">60s</a></td>
+        <td><a type="button" ng-click="setRange(70,79)" class="btn btn-default">70s</a></td>
+        <td><a type="button" ng-click="setRange(80,89)" class="btn btn-default">80s</a></td>
+      </tr>
+      </table>
+    <br>
+    
+      <div class="input-group ">
+            
+<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+            <input class="input col-md-12 form-control" type="text" placeholder="Search routes" ng-model="query1" ng-click="setRange(0,100)" />
+         </div>
+    
+
+      
+
+
+     <br><br>
+   </div>
+
+ </div>
+</div>
+
+<div class="container" >
+  <div class="row" >
+    <div class="col-md-8 col-md-offset-2 mobile-no-margin" >
+      <table class="table" style="border:0;">
+        <tr ng-repeat="route in routes | filter:query1 | filter:query2 | filter:rangeFilter | orderBy:route[2]">
+          <td class="route-{{route[2]}}" style="height:75px;width:40px;text-align:center;vertical-align:middle;font-size:16pt;">
+            <strong>{{route[2]}}</strong>
+          </td>
+          <td style="padding-top:15px;padding-bottom:8px;vertical-align:middle;line-height:15px;">
+            <a href="#/route/{{route[2]}}" style="color:#000;"><h4 style="margin:0;">{{route[5].split(".")[0].split("Serves ")[1]}}</h4>
+
+              <p style="margin-top:5px;">{{route[5].split(".")[1]}}</p>
+            </a>
+          </td>
+          <td style="vertical-align:middle;">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </td>
+
+
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center;border:0;" ng-hide="routes.length" ng-cloak><br><img src="img/ajax-loader-big-red.gif"/><br>&nbsp;</td>
+
+        </tr>
+
+
+
+      </table>
+
+
+      <!--</table>-->
+    </div>
+
+  </div>
+</div>

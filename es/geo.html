@@ -1,0 +1,45 @@
+<div class="keep-margin-mobile">
+<div class="container-fluid" ng-init="getPos()">
+  <div class="row-fluid">
+
+  	<div class="span12">
+      <h3 style="font-weight:normal;"class="muted">Paradas <strong>cerca de usted</strong></h3><br>
+    </div>
+    
+  </div>
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid" >
+
+    <div class="span5">
+      
+      <table class="table table-striped" style="border:1px solid #ddd;">
+        <tr class="muted" >
+          <th>&nbsp;</th>
+          <th style="background:#f5f5f5;"><small ng-click="sortBy('intersection')">Intersecci&oacute;n o ubicaci&oacute;n</small></th>
+          <!--<th style="text-align:center;"><small ng-click="sortBy('stopID')">Stop ID</small></th>-->
+          
+          <th style="text-align:center;background:#f5f5f5;"><small>Distancia</small></th>
+        </tr>
+        <tr ng-repeat="stop in d.stop">
+          <td style="width:20px;text-align:center;"><img src="{{'img/mapicons/number_' + ($index+1) + '.png'}}"/></td>
+          <td style="font-size:16px;"><a href="#/stop/{{stop.stopID}}">{{stop.intersection.toStopFormat()}}</a></td>
+          <!--<td class="muted" style="text-align:center;"><small>{{stop.stopID}}</small></td>-->
+          
+          <td style="text-align:center;"><strong>{{calcDist(position, stop.latitude, stop.longitude)}}</strong> mi</td>
+        </tr>
+        <tr id="geo-loader"><td colspan="3" style="text-align:center;"><br><img src="img/ajax-loader-big.gif"/><br>&nbsp;</td></tr>
+        <tr id="geo-retry" class="warning" ng-hide="1"><td colspan="3" style="text-align:center;"><i class="icon-map-marker"></i> <small>Por favor, activa geolocalizaci&oacute;n en el navegador para usar esta p&aacute;gina</small></td></tr>
+        <tr class="error" id="geo-nostops" ng-hide="1"><td colspan="3" style="text-align:center"><i class="icon-info-sign"></i> <small>No hay paradas a menos de 0.25 millas de su ubicaci&oacute;n</small></td></tr>
+      </table>
+    </div>
+
+    <div class="span7">
+<google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="false" fit="true" style="height: 500px" class="google-maps"></google-map><br>
+
+   </div>
+
+ </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row-fluid" >
+
+    <div class="span8 offset2">
+      <h3 class="muted">Search all stops</h3>
+      
+        <input class="input span6" type="text" placeholder="Search stops" ng-model="query" /><input class="btn" type="Search" value="submit" ng-click="s()" />
+   <br><br>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    
+    <div class="span4 offset2">
+  
+      <table class="table table-striped table-hover">
+        <tr>
+          <th class="muted" style="vertical-align:middle;"><small>Intersection or location</small></th>
+          
+          <th class="muted" style="text-align:center;"><small>Direction</small></th>
+          <th class="muted" style="text-align:center;vertical-align:middle;"><small>Stop ID</small></th>
+          
+        </tr>
+        <tr ng-repeat="stop in allStops | filter:query1">
+          <td><strong><a href="#/stop/{{stop[0]}}">{{stop[1].toStopFormat().split('(')[0]}}</a></strong></td>
+          
+          <td style="text-align:center;"><strong><small>{{stop[2].toCapitalize().split('b')[0]}}</small></strong></td>
+          <td class="muted" style="text-align:center;"><small>{{stop[0]}}</small></td>
+          
+
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</div>

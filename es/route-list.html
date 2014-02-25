@@ -1,0 +1,36 @@
+<div class="keep-margin-mobile">
+<div class="container-fluid">
+  <div class="row-fluid" >
+
+    <div class="span6 offset3">
+      <h3 style="font-weight:normal;"class="muted">Encuentra paradas <strong>por ruta</strong></h3>
+      
+        <input class="input span12" type="text" placeholder="Busca rutas" ng-model="query1" />
+   <br><br>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid" >
+    <div class="span6 offset3">
+
+      <table class="table table-striped table-hover" style="border:1px solid #ddd;">
+      	<tr class="muted">
+          <th style="text-align:center;background:#f5f5f5;"><small>Ruta</small></th>
+          <th style="background:#f5f5f5;"><small>Hacia y desde</small></th>
+          <th style="background:#f5f5f5;"><small>&nbsp;</small></th>
+        </tr>
+        <tr ng-repeat="route in routes | filter:query1 | filter:query2 | orderBy:sort">
+          <td class="text-error" style="text-align:center; font-size:20pt;vertical-align:middle;">{{route.routeID.dezero()}}</td>
+          <td style="padding-right:0;vertical-align:middle;font-size:10pt;">{{route.directions[0]}}<br>{{route.directions[1]}}</td>
+          <td style="padding-left:0;text-align:center;vertical-align:middle;"><strong><a class="" href="#/route/{{route.routeID}}">Ver paradas</a></strong></td>
+        </tr>
+        <tr class=""><td colspan="3" style="text-align:center;" ng-hide="routes.length" ng-cloak><br><img src="img/ajax-loader-big.gif"/><br>&nbsp;</td></tr>
+      </table>
+    </div>
+
+  </div>
+</div>

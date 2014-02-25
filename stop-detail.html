@@ -1,0 +1,146 @@
+<script>
+
+
+function checkFav(id) {
+  if (localStorage.getItem(id) == null) return 0;
+  else return 1;
+}
+
+function fav(id, name) {
+  localStorage.setItem(id, name);
+  console.log(localStorage);
+}
+
+if ($(window).width() <= 767) {
+  $('#map').css('position', 'absolute');
+  $('#map').css('left', '-10000px');
+  $('#arrivalsButton').addClass('active');
+  $('#mapButton').removeClass('active');
+}
+
+$(window).resize(function() {
+  if ($(window).width() > 767) {
+    $('#arrivals').show();
+    $('#map').css('position', '');
+    $('#map').css('left', '');
+  }
+  else {
+    showArrivals();
+  }
+});
+
+function showArrivals() {
+  $('#arrivalsButton').addClass('active');
+  $('#mapButton').removeClass('active');
+  $('#map').css('position', 'absolute');
+  $('#map').css('left', '-10000px');
+  $('#arrivals').show();
+}
+
+function showMap() {
+  $('#mapButton').addClass('active');
+  $('#arrivalsButton').removeClass('active');
+  $('#arrivals').hide();
+  $('#map').css('position', '')
+  $('#map').css('left', '');
+}
+
+</script>
+
+  <div class="container">
+    <div class="row">
+
+     <div class="col-md-12">
+      
+
+      <h4 style="line-height:25px;display:inline">{{name}}&nbsp;</h4>
+      <small class="text-muted" style="white-space:nowrap;"><strong>{{dir.toCapitalize()}}</strong> &middot; Wheelchairs?: <strong >{{wheelchair | accessible}}</strong> &middot; Stop ID: <strong>{{stopid}}</strong></small>
+      <br><br>
+
+      <div style="text-align:center;"class="btn-group btn-group-justified visible-xs">
+        <a type="button" id="arrivalsButton"class="btn btn-default btn-md active" onclick="showArrivals()"><span class="glyphicon glyphicon-list-alt"></span> Arrivals</a>
+        <a type="button"id="mapButton" class="btn btn-default btn-md" onclick="showMap()"><span class="glyphicon glyphicon-globe"></span> Map</a><br>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="row" >
+
+    <div id="arrivals" class="col-md-4 col-sm-5 mobile-no-margin" ng-controller="ArrivalCtrl">
+
+
+      <div class="panel panel-default" style="">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="btn-group">
+                <a class="dropdown-toggle btn btn-danger btn-md" data-toggle="dropdown" data-href="#">&nbsp;<span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;{{ RouteFilterVal.dezero()}}</a>
+                <ul class="dropdown-menu pull-left" role="menu" aria-labelledby="dLabel">
+                  <li style="text-align:left;"><a data-target="#" value="0" ng-click="onlyRoute(0)">All routes</a></li>
+                  <li style="text-align:left;" ng-repeat="r in rList"><a data-target="#" value="{{r}}" ng-click="onlyRoute(r)">Route {{r.dezero()}}</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-xs-6" >
+              <div class="btn-group pull-right">
+                <a type="button" class="dropdown-toggle btn btn-danger btn-md" data-toggle="dropdown" data-href="#"><span class="glyphicon glyphicon-time"></span> {{timeText(ETAFilterVal)}}</a>
+                <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+                  <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(15)">Next 15 minutes</a></li>
+                  <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(30)">Next 30 minutes</a></li>
+                  <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(60)">Next 1 hour</a></li>
+                  <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(120)">Next 2 hours</a></li>
+                  <!--<li style="text-align:left;"><a data-target="#" ng-click="onlyTime(5000)">All arrivals</a></li>-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      <table class="table" style="margin:0;">
+
+
+       <tr class="text-muted">
+        <th style="font-weight:normal;padding:0;width:50px;text-align:center;vertical-align:middle;background:#f5f5f5;">
+          <small>Route</small>
+        </th>
+        <th style="font-weight:normal;vertical-align:middle;background:#f5f5f5;padding-left:10px;"><small>Towards</small></th>
+        <th style="font-weight:normal;text-align:right;vertical-align:middle;background:#f5f5f5;">
+          <small>Arrives&nbsp;in</small>
+        </th>
+      </tr>
+      <tr ng-repeat="arrival in filteredArrivals = (arrivals | filter: filterByETA | filter: filterByRoute)" style="height:50px;border-top:1px solid #ddd">
+        <td class="route-{{arrival.routeID.dezero()}}" style="text-align:center;vertical-align:middle;font-size:16pt;"><strong>{{arrival.routeID.dezero()}}</strong></td>
+        <td style="vertical-align:middle;font-size:11pt;line-height:12px;padding-left:10px;">{{arrival.destination[0].toDestFormat()}}<br><small class="text-muted">{{arrival.destination[1].toDestFormat()}}</small></td>
+        <td style="vertical-align:middle;font-size:12pt;" class="min" ng-bind-html="calcETA(arrival.minutes)"></td>
+      </tr>
+
+      <tr id="arrival-loader"><td colspan="3" style="text-align:center;"><br><img src="img/ajax-loader-big-red.gif"/><br>&nbsp;</td></tr>
+      <tr class="danger" ng-show="noArrivals"><td colspan="3" style="text-align:center;"><span class="glyphicon glyphicon-time"></span> No buses are currently expected at this stop.</td></tr>
+      <tr class="warning" ng-show="showMessage(filteredArrivals.length)"><td colspan="3" style="text-align:center;"><span class="glyphicon glyphicon-time"></span> No route {{RouteFilterVal.dezero()}} arrivals in the next {{ETAFilterVal}} minutes.<!-- <a data-target="#" ng-click="onlyRoute(0);onlyTime(60);">Reset filters</a>--></td></tr>
+    </table>
+
+
+    <div class="panel-footer text-muted">
+      <small>Updated automatically every minute.</small><img id="arr-loader-small" class="pull-right" src="img/ajax-loader-red.gif" /></div>
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+  <div id="map" class="col-md-8 col-sm-7 mobile-no-margin">
+
+
+   <google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="false" style="height:;" fit="true" class="google-maps"></google-map><br>
+
+ </div>
+
+</div>

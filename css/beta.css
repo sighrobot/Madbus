@@ -1,0 +1,79 @@
+/*::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}*/
+
+body * {
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+google-map {
+	display:block;
+	height:582px;
+}
+
+a {
+	color:#ce3331;
+}
+
+a:hover {
+	color:#808080;
+	text-decoration:underline;
+
+}
+
+.btn-link, .btn-link:hover {
+	color:#ce3331;
+	text-decoration:none;
+}
+
+
+
+td.rid {
+	text-align:center;
+
+}
+td.min {
+	text-align:right;
+}
+
+div#scroll-wrap {
+	overflow:scroll;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	border-left:1px solid #fff;
+	border-right:1px solid #fff;
+	max-height:540px;
+}
+
+ol.breadcrumb {
+	margin-left:0;
+	padding-left:0;
+	background:#fff;
+}
+
+@media (max-width: 480px) {
+  .mobile-no-margin {
+    margin-left:-15px;
+    margin-right:-15px;
+    padding:0;
+  }
+  
+}
+
+table.route-pad {
+	margin:0;
+}
+
+table.route-pad tr td {
+	border:0;
+	padding:2px 0px 2px 0px;
+	width:50px;
+	text-align:center;
+}
+

@@ -1,0 +1,80 @@
+<div class="keep-margin-mobile">
+<div class="container-fluid">
+  <div class="row-fluid">
+
+  	<div class="span12">
+      
+      
+      <h3 style="margin-bottom:0px;line-height:25px;font-weight:normal;">{{name}}</h3>
+      <div style="margin-top:0px;"class="muted"><small><span class="hidden-phone">Direcci&oacute;n</span><span class="visible-phone">Dir.</span> <strong>{{dir | directionES}}</strong> &middot; Sillas de ruedas: <strong >{{wheelchair | accessibleES}}</strong> &middot; &#8470; de parada: <strong>{{stopid}}</strong></small></div><br>
+      
+    </div>
+    
+  </div>
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid" >
+
+    <div class="span5" ng-controller="ArrivalCtrl">
+
+   
+    <table class="table table-striped table-hover" style="border:1px solid #ddd;">
+      <tr>
+        <th class="" colspan="3" style="padding-left:30px;vertical-align:middle;background:#eee;"><span class="lead muted">Llegadas&nbsp;&nbsp;<img id="arr-loader-small" ng-hide="1" style="position:relative;top:-2px" src="img/ajax-loader.gif" /></span> <div class="btn-toolbar" style="margin:0;float:right;"><div class="btn-group">
+            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#"><i class="icon-random"></i> {{RouteFilterVal.dezero()}}</a>
+            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+              <li style="text-align:left;"><a data-target="#" value="0" ng-click="onlyRoute(0)">Todas rutas</a></li>
+              <li style="text-align:left;" ng-repeat="r in rList"><a data-target="#" value="{{r}}" ng-click="onlyRoute(r)">Ruta {{r.dezero()}}</a></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#"><i class="icon-time"></i> {{timeText(ETAFilterVal)}}</a>
+            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+              <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(15)">Próx. 15 min</a></li>
+              <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(30)">Próx. 30 min</a></li>
+              <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(60)">Próx. 1 hora</a></li>
+              <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(120)">Próx. 2 horas</a></li>
+              <li style="text-align:left;"><a data-target="#" ng-click="onlyTime(5000)">Todas llegadas</a></li>
+            </ul>
+          </div>
+        </div>
+        </th>
+      
+        
+      </tr>
+     <tr class="muted" style="background:#f5f5f5">
+      <th style="text-align:center;vertical-align:middle;">
+        <small>Ruta</small>
+        </th>
+        <th style="vertical-align:middle;"><small>Hacia</small></th>
+        <th style="text-align:right;vertical-align:middle;">
+          <small>Llega&nbsp;en</small>
+        </th>
+      </tr>
+      <tr ng-repeat="arrival in filteredArrivals = (arrivals | filter: filterByETA | filter: filterByRoute)" style="height:40px;">
+        <td class="rid text-error" style="text-align:center; vertical-align:middle;
+        font-size:16pt;"><strong>{{arrival.routeID.dezero()}}</strong></td>
+        <td style="vertical-align:middle;font-size:11pt;line-height:12px;">{{arrival.destination[0].toDestFormat()}}<br><small class="muted">{{arrival.destination[1].toDestFormat()}}</small></td>
+        <td style="vertical-align:middle;font-size:12pt;" class="min" ng-bind-html-unsafe="calcETA(arrival.minutes)"></td>
+      </tr>
+
+      <tr id="arrival-loader"><td colspan="3" style="text-align:center;"><br><img src="img/ajax-loader-big.gif"/><br>&nbsp;</td></tr>
+      <tr class="error" ng-show="noArrivals"><td colspan="3" style="text-align:center;"><i class="icon-time"></i> No buses are currently expected at this stop.</td></tr>
+      <tr class="warning" ng-show="showMessage(filteredArrivals.length)"><td colspan="3" style="text-align:center;"><i class="icon-time"></i> No Route {{RouteFilterVal.dezero()}} arrivals in the next {{ETAFilterVal}} minutes.<!-- <a data-target="#" ng-click="onlyRoute(0);onlyTime(60);">Reset filters</a>--></td></tr>
+    </table><br>
+
+  </div>
+
+
+
+  <div class="span7">
+
+
+   <google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="false" style="height: 500px" fit="true" class="google-maps"></google-map><br>
+
+ </div>
+
+</div>
+</div>
