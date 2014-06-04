@@ -405,6 +405,8 @@ Page.setTitle('Find stops near you');
 		};
 
 	$scope.getPos = function() {
+		$('#geo-nostops').hide();
+		$('#geo-retry').hide();
 		$window.navigator.geolocation.getCurrentPosition(function(position) {
 			$scope.$apply(function() {
 				$scope.position = position;

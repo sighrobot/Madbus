@@ -1,4 +1,5 @@
-var app = angular.module('madbus', ['ngRoute', 'ngSanitize', 'madbusFilters', 'google-maps']);
+var app = angular
+	.module('madbus', ['ngRoute', 'ngSanitize', 'madbusFilters', 'google-maps']);
 
 app.config(['$routeProvider', function ($routeProvider) {
 
@@ -39,5 +40,6 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.run(function ($rootScope) {
 		// New look for Google Maps
 		google.maps.visualRefresh = true;
+
 	});
 

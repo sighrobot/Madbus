@@ -1,43 +1,4 @@
-<script>
-
-if ($(window).width() <= 991) {
-  $('#map').css('position', 'absolute');
-  $('#map').css('left', '-10000px');
-  $('#arrivalsButton').addClass('active');
-  $('#mapButton').removeClass('active');
-}
-
-$(window).resize(function() {
-  if ($(window).width() > 991) {
-    $('#arrivals').show();
-    $('#map').css('position', '');
-    $('#map').css('left', '');
-  }
-  else {
-    showArrivals();
-  }
-});
-
-function showArrivals() {
-  $('#arrivalsButton').addClass('active');
-  $('#mapButton').removeClass('active');
-  $('#map').css('position', 'absolute');
-  $('#map').css('left', '-10000px');
-  $('#arrivals').show();
-}
-
-function showMap() {
-  $('#mapButton').addClass('active');
-  $('#arrivalsButton').removeClass('active');
-  $('#arrivals').hide();
-  $('#map').css('position', '')
-  $('#map').css('left', '');
-}
-
-</script>
-
-
-  <div class="row" >
+<div class="row" >
   
     <div class="col-md-12">
       <table>
@@ -53,20 +14,20 @@ function showMap() {
       
       
 <br>
-      <div style="text-align:center;"class="btn-group btn-group-justified visible-xs visible-sm">
+      <!--<div style="text-align:center;"class="btn-group btn-group-justified visible-xs visible-sm">
   <a id="arrivalsButton"class="btn btn-default btn-md active" onclick="showArrivals()"><span class="glyphicon glyphicon-list-alt"></span> List</a>
   <a id="mapButton" class="btn btn-default btn-md" onclick="showMap()"><span class="glyphicon glyphicon-globe"></span> Map</a>
-</div>
+</div>-->
 
     </div>
-<br><br class="hidden-xs hidden-sm">
+<br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm">
   </div>
 
 
 
   <div class="row">
 
-    <div id="arrivals" class="col-md-5 ">
+    <div id="arrivals" class="col-md-4 col-sm-5 ">
       
      
         <div class="input-group">
@@ -101,10 +62,11 @@ function showMap() {
 
  
 
-
-    <div id="map" class="col-md-7" >
-<google-map center="center" draggable="true" zoom="zoom" markers="markers" active="active" mark-click="false" fit="true" style="height:;" class="google-maps"></google-map><br>
+<div class="mobile-no-margin">
+    <div id="map" class="col-md-8 col-sm-7" >
+<google-map center="center" draggable="true" zoom="zoom" markers="markers" active="active" mark-click="false" fit="true" class="google-maps"></google-map><br>
 
    </div>
+ </div>
     
 </div>

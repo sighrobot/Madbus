@@ -1,6 +1,5 @@
 <script>
-
-
+/*
 function checkFav(id) {
   if (localStorage.getItem(id) == null) return 0;
   else return 1;
@@ -9,72 +8,32 @@ function checkFav(id) {
 function fav(id, name) {
   localStorage.setItem(id, name);
   console.log(localStorage);
-}
-
-if ($(window).width() <= 767) {
-  $('#map').css('position', 'absolute');
-  $('#map').css('left', '-10000px');
-  $('#arrivalsButton').addClass('active');
-  $('#mapButton').removeClass('active');
-}
-
-$(window).resize(function() {
-  if ($(window).width() > 767) {
-    $('#arrivals').show();
-    $('#map').css('position', '');
-    $('#map').css('left', '');
-  }
-  else {
-    showArrivals();
-  }
-});
-
-function showArrivals() {
-  $('#arrivalsButton').addClass('active');
-  $('#mapButton').removeClass('active');
-  $('#map').css('position', 'absolute');
-  $('#map').css('left', '-10000px');
-  $('#arrivals').show();
-}
-
-function showMap() {
-  $('#mapButton').addClass('active');
-  $('#arrivalsButton').removeClass('active');
-  $('#arrivals').hide();
-  $('#map').css('position', '')
-  $('#map').css('left', '');
-}
+}*/
 
 </script>
 
-  <div class="container">
+  
     <div class="row">
 
      <div class="col-md-12">
-      
-
       <h4 style="line-height:25px;display:inline">{{name}}&nbsp;</h4>
       <small class="text-muted" style="white-space:nowrap;"><strong>{{dir.toCapitalize()}}</strong> &middot; Wheelchairs?: <strong >{{wheelchair | accessible}}</strong> &middot; Stop ID: <strong>{{stopid}}</strong></small>
+    
       <br><br>
-
-      <div style="text-align:center;"class="btn-group btn-group-justified visible-xs">
-        <a type="button" id="arrivalsButton"class="btn btn-default btn-md active" onclick="showArrivals()"><span class="glyphicon glyphicon-list-alt"></span> Arrivals</a>
-        <a type="button"id="mapButton" class="btn btn-default btn-md" onclick="showMap()"><span class="glyphicon glyphicon-globe"></span> Map</a><br>
-      </div>
-      
     </div>
     
   </div>
-</div>
 
-<div class="container">
+
+
 
   <div class="row" >
 
-    <div id="arrivals" class="col-md-4 col-sm-5 mobile-no-margin" ng-controller="ArrivalCtrl">
+    <div id="arrivals" class="col-md-4 col-sm-5" ng-controller="ArrivalCtrl">
+      <div class="mobile-no-margin">
 
 
-      <div class="panel panel-default" style="">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
             <div class="col-md-6 col-xs-6">
@@ -131,16 +90,17 @@ function showMap() {
     </div>
     
 
-  </div>
+  </div><br>
 </div>
 
 
 
-  <div id="map" class="col-md-8 col-sm-7 mobile-no-margin">
+  <div id="map" class="col-md-8 col-sm-7">
+    <div class="mobile-no-margin">
 
 
-   <google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="false" style="height:;" fit="true" class="google-maps"></google-map><br>
-
+   <google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="false" fit="true" class="google-maps"></google-map><br>
+</div>
  </div>
-
 </div>
+

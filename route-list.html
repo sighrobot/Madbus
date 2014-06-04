@@ -1,9 +1,8 @@
 
-<div class="container">
+
   <div class="row">
 
     <div class="col-md-8 col-md-offset-2">
-
       <h4 style="font-weight:normal;">Find bus stops <strong>by route</strong></h4><br>
 
      
@@ -25,7 +24,7 @@
       </table>
       <table class="table table-condensed route-pad hidden-xs">
         <tr>
-        <td><a type="button" ng-click="setRange(0,100)" class="btn btn-default"><strong>All</strong></a></td>
+        <td><a type="button" ng-click="setRange(0,100)" class="btn btn-default"><strong>All routes</strong></a></td>
         <td><a type="button" ng-click="setRange(1,9)" class="btn btn-default ">&nbsp;1s</a></td>
         <td><a type="button" ng-click="setRange(10,19)" class="btn btn-default">10s</a></td>
         <td><a type="button" ng-click="setRange(20,29)" class="btn btn-default ">20s</a></td>
@@ -40,7 +39,7 @@
       </table>
     <br>
     
-      <div class="input-group ">
+      <div class="input-group">
             
 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
             <input class="input col-md-12 form-control" type="text" placeholder="Search routes" ng-model="query1" ng-click="setRange(0,100)" />
@@ -54,24 +53,23 @@
    </div>
 
  </div>
-</div>
 
-<div class="container" >
   <div class="row" >
-    <div class="col-md-8 col-md-offset-2 mobile-no-margin" >
-      <table class="table" style="border:0;">
+    <div class="col-md-8 col-md-offset-2 " >
+      <div class="mobile-no-margin">
+      <table class="table route-table" style="border:0;">
         <tr ng-repeat="route in routes | filter:query1 | filter:query2 | filter:rangeFilter | orderBy:route[2]">
-          <td class="route-{{route[2]}}" style="height:75px;width:40px;text-align:center;vertical-align:middle;font-size:16pt;">
-            <strong>{{route[2]}}</strong>
+          <td class="route-{{route[2]}}" style="width:40px;text-align:center;vertical-align:middle;font-size:16pt;">
+            <a href="#/route/{{route[2]}}"><strong>{{route[2]}}</strong></a>
           </td>
           <td style="padding-top:15px;padding-bottom:8px;vertical-align:middle;line-height:15px;">
-            <a href="#/route/{{route[2]}}" style="color:#000;"><h4 style="margin:0;">{{route[5].split(".")[0].split("Serves ")[1]}}</h4>
+            <a href="#/route/{{route[2]}}"><h4 style="margin:0;">{{route[5].split(".")[0].split("Serves ")[1]}}</h4>
 
-              <p style="margin-top:5px;">{{route[5].split(".")[1]}}</p>
+              <p style="margin-top:5px;font-size:10pt;">{{route[5].split(".")[1]}}</p>
             </a>
           </td>
           <td style="vertical-align:middle;">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a href="#/route/{{route[2]}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
           </td>
 
 
@@ -84,10 +82,7 @@
 
 
       </table>
-
-
-      <!--</table>-->
+    </div>
     </div>
 
   </div>
-</div>
